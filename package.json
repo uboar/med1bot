@@ -1,0 +1,21 @@
+{
+  "name": "med1reviewing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy_command": "node deploy/deployCommands",
+    "deploy_command_global": "node deploy/deployCommands",
+    "serve": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "^0.3.0",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.11.0",
+    "express": "^4.17.3"
+  }
+}
