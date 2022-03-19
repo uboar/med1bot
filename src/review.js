@@ -91,13 +91,19 @@ module.exports = {
      * 全員の採点終了を確認する
      */
     checkReviewed() {
-        if ((this.sendData.currentMedley.listenerPoint.actualPoint != -1) && (this.sendData.currentMedley.reviewersPoint.indexOf(-1) > 0)) {
+        if ((this.sendData.currentMedley.listenerPoint.actualPoint != -1)) {
             this.sendData.currentMedley.point = this.sendData.currentMedley.listenerPoint.actualPoint;
+            var valid = true;
             this.sendData.currentMedley.reviewersPoint.forEach((elem, index) => {
                 if (this.sendData.reviewers[index].isValid == true) {
-                    this.sendData.currentMedley.point += elem;
+                    if (elem != -1) {
+                        this.sendData.currentMedley.point += elem;
+                    } else {
+                        valid = false;
+                    }
                 }
             });
+            if (!valid) return false;
             this.sendData.currentMedley.point = Math.round(this.sendData.currentMedley.point * 100) / 100;
 
             this.sendData.medleys.push({ ...this.sendData.currentMedley });
