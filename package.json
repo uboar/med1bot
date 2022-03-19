@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy_command": "node deploy/deployCommands",
-    "deploy_command_global": "node deploy/deployCommands",
+    "deploy_command_global": "node deploy/deployCommandsGlobal",
     "serve": "node src/index.js"
   },
   "author": "",
