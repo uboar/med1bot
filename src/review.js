@@ -112,6 +112,28 @@ module.exports = {
         return false;
     },
     /**
+     * 出力JSONデータの生成
+     */
+    jsonGen() {
+        const jsonData = {
+            reviewers: this.sendData.reviewers,
+            medleys: this.sendData.medleys
+        }
+        return jsonData;
+    },
+    /**
+     * 出力CSVデータの生成
+     */
+    csvGen() {
+        var data = this.jsonGen();
+        var csvHeader = `メドレー名,作者名,合計得点,${data.reviewers[0].name},${data.reviewers[1].name},${data.reviewers[2].name},${data.reviewers[3].name},${data.reviewers[4].name},視聴者投票,1割合,2割合,3割合,4割合,5割合\n`;
+        var csvData = "";
+        data.medleys.forEach((elem) => {
+            csvData += `${elem.name},${elem.artist},${elem.point},${elem.reviewersPoint[0]},${elem.reviewersPoint[1]},${elem.reviewersPoint[2]},${elem.reviewersPoint[3]},${elem.reviewersPoint[4]},${elem.listenerPoint.actualPoint},${elem.listenerPoint.per[0]},${elem.listenerPoint.per[1]},${elem.listenerPoint.per[2]},${elem.listenerPoint.per[3]},${elem.listenerPoint.per[4]}\n`
+        })
+        return (csvHeader + csvData);
+    },
+    /**
      * 全データ初期化
      */
     clearAll() {

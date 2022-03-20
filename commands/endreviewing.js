@@ -1,10 +1,12 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageAttachment } = require('discord.js');
 const review = require('../src/review.js');
 
 const texts = {
     okey: "okey",
     description: "作品の採点を終了し、アイドル状態に戻ります。",
-    okeyDescription: "作品の採点が進行中の場合、『okey』と入力する必要があります。"
+    okeyDescription: "作品の採点が進行中の場合、『okey』と入力する必要があります。",
+    jsonFileName: "gen.json"
 }
 
 async function execute(interaction) {
@@ -18,7 +20,10 @@ async function execute(interaction) {
         }
     } else {
         review.sendData.reviewingStatus = 0;
-        interaction.reply("採点を終了しました。次の採点を開始出来ます。");
+        const genJsonData = JSON.stringify(review.jsonGen());
+
+        const jsonFile = new MessageAttachment(Buffer.from(genJsonData), texts.jsonFileName);
+        interaction.reply({ files: [jsonFile], content: "採点を終了しました。次の採点を開始出来ます。", });
     }
 }
 

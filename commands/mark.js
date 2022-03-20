@@ -17,7 +17,7 @@ async function execute(interaction) {
     } else {
         var valid = false;
         review.sendData.reviewers.forEach((elem, index) => {
-            if ((elem.isValid == true) && (elem.id == interaction.user.id)) {
+            if ((elem.isValid == true) && (elem.id == interaction.user.id) && (valid == false)) {
                 review.sendData.currentMedley.reviewersPoint[index] = point;
                 if (review.checkReviewed() == true) {
                     review.sendData.reviewingStatus = 1;
