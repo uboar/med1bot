@@ -1,4 +1,13 @@
 # med1bot
+
+## 動かし方
+nodeCGのインストールフォルダ/bundles/med1reviewingに配置
+```
+npm run nodecg
+```
+で起動
+
+## 以下古い情報
 ## コマンド
 ```
 npm run serve

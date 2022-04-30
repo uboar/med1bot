@@ -7,18 +7,40 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy_command": "node deploy/deployCommands",
     "deploy_command_global": "node deploy/deployCommandsGlobal",
-    "serve": "node src/index.js"
+    "serve": "node src/index.js",
+    "nodecg": "node ../.."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
+    "animate.css": "^4.1.1",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "eslint": "^8.11.0",
     "express": "^4.17.3",
     "got": "^12.0.2",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vuetify": "^2.6.4",
+    "yakuhanjp": "^3.4.1"
+  },
+  "nodecg": {
+    "compatibleRange": "^1.9.0",
+    "dashboardPanels": [
+      {
+        "name": "Med1Reviewing",
+        "title": "Med1Reviewing",
+        "width": "10",
+        "file": "index.html"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
   }
 }

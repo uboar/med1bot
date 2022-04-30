@@ -55,18 +55,8 @@ module.exports = {
         .setName('marklistener')
         .setDescription(texts.description)
         .addNumberOption(option => option
-            .setName(texts.point1)
-            .setDescription(texts.point1Description)
-            .setRequired(true)
-        )
-        .addNumberOption(option => option
-            .setName(texts.point2)
-            .setDescription(texts.point2Description)
-            .setRequired(true)
-        )
-        .addNumberOption(option => option
-            .setName(texts.point3)
-            .setDescription(texts.point3Description)
+            .setName(texts.point5)
+            .setDescription(texts.point5Description)
             .setRequired(true)
         )
         .addNumberOption(option => option
@@ -75,8 +65,18 @@ module.exports = {
             .setRequired(true)
         )
         .addNumberOption(option => option
-            .setName(texts.point5)
-            .setDescription(texts.point5Description)
+            .setName(texts.point3)
+            .setDescription(texts.point3Description)
+            .setRequired(true)
+        )
+        .addNumberOption(option => option
+            .setName(texts.point2)
+            .setDescription(texts.point2Description)
+            .setRequired(true)
+        )
+        .addNumberOption(option => option
+            .setName(texts.point1)
+            .setDescription(texts.point1Description)
             .setRequired(true)
         ),
     execute: execute,

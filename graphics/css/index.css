@@ -1,0 +1,74 @@
+.point-wrapper {
+    width: 75%;
+    margin: auto
+}
+
+.point-item-wrapper {
+    border: .2rem #efad67 solid;
+    background: #252525;
+    color: #fff;
+    text-align: center
+}
+
+.point-item-wrapper:first-child {
+    border-bottom: none
+}
+
+.point-item-wrapper:last-child:not(first-child) {
+    padding-top: .5rem;
+    padding-bottom: .5rem
+}
+
+.point-grid-item:not(:last-child) .point-item-wrapper {
+    border-right: none
+}
+
+.point-total {
+    width: 50%;
+    margin: auto
+}
+
+.point-total .point-item-wrapper {
+    margin: 0 2rem
+}
+
+.point-title-wrapper {
+    padding: .5rem;
+    background: url("../images/title-bg.png") center center no-repeat;
+    text-align: center;
+    font-family: YakuHanJP, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #fff
+}
+
+.point-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+}
+
+.point-text-point {
+    font-family: "Grand Royal";
+    font-weight: bold;
+    font-size: 5.25rem
+}
+.point-text-point-sum {
+    font-family: "Grand Royal";
+    font-weight: bold;
+    font-size: 7rem
+}
+
+.point-text-name {
+    font-family: YakuHanJP, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #b9fb0d
+}
+
+.point-text-name.listener {
+    color: #00d8ff
+}
+
+.invisible {
+    visibility: hidden
+}

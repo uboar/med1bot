@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <!--CDNから持ってくるもの-->
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <!-- Other fonts -->
+    <link rel="stylesheet" href="../node_modules/yakuhanjp/dist/css/yakuhanjp.min.css">
+    <link rel="stylesheet" href="./css/grand-royal.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <!--Material Design Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <!--Vuetify-->
+    <link href="../node_modules/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <!--animate.css-->
+    <link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <v-app style="background: rgba(0, 0, 0, 0);" class="overflow-hidden">
+            <!--放送表示部-->
+            <div class="justify-center" v-if="JSON.stringify(receivedData) != `{}`">
+                <div v-show="receivedData.show" class="point-wrapper animate__animated animate__bounceIn my-8">
+                    <div class="point-total">
+                        <!--点数表示部-->
+                        <div class="point-item-wrapper">
+                            <!--点数表示は少数点四捨五入-->
+                            <span class="point-text-point-sum">{{Math.round(receivedData.currentMedley.point)}}</span>
+                        </div>
+                        <!--メドレー名表示部-->
+                        <div class="point-title-wrapper">
+                            <span><h5 class="my-n2">{{receivedData.currentMedley.name}}</h5><h6 class="mb-n2">{{receivedData.currentMedley.artist}}</h6></span>
+                        </div>
+                    </div>
+                    <div class="point-grid">
+                        <!-- 審査員投票 -->
+                        <div v-for="(item, index) in receivedData.reviewers" :key="item.name" class="point-grid-item">
+
+                            <!--点数表示部-->
+                            <div class="point-item-wrapper">
+                                <!--点数表示は四捨五入-->
+                                <!--:class="{invisible: !item.isValid}">-->
+                                <span class="point-text-point" :class="{invisible: !item.isValid}">
+                                    {{Math.round(receivedData.currentMedley.reviewersPoint[index])}}
+                                </span>
+                            </div>
+                            <!--名前表示部-->
+                            <div class="point-item-wrapper">
+                                <span class="point-text-name" :class="{invisible: !item.isValid}">
+                                    {{item.name}}
+                                </span>
+                            </div>
+                        </div>
+                        <!--視聴者投票-->
+                        <div class="point-grid-item">
+                            <div class="point-item-wrapper">
+                                <!--点数表示は四捨五入-->
+                                <span class="point-text-point">
+                                    {{Math.round(receivedData.currentMedley.listenerPoint.actualPoint)}}
+                                </span>
+                            </div>
+                            <!--名前表示部-->
+                            <div class="point-item-wrapper">
+                                <span class="point-text-name listener">視聴者</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </v-app>
+    </div>
+
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        html {
+            overflow-y: hidden;
+        }
+    </style>
+    <!--Vue.js v2-->
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <!--Vuetify-->
+    <script src="../node_modules/vuetify/dist/vuetify.min.js"></script>
+
+    <script>
+        /**
+         * Vue.jsのマウント
+         */
+        var rep = nodecg.Replicant("reviewData");
+        rep.on("change", newValue => {
+            console.log("changed")
+            app.receivedData = JSON.parse(JSON.stringify(newValue));
+        });
+
+        var app = new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: {
+                receivedData: {},
+                models: {
+                    tab: 0,
+                },
+                headers: [
+                ],
+            },
+        });
+
+    </script>
+</body>
+
+</html>

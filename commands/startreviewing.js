@@ -16,6 +16,7 @@ async function execute(interaction) {
         var name = interaction.options.getString(texts.name);
         var artist = interaction.options.getString(texts.artist);
 
+        review.sendData.show = false;
         review.sendData.reviewingStatus = -1;
         review.setCurrentMedleyData(name, artist);
 

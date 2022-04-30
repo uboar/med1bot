@@ -1,14 +1,12 @@
 require('dotenv').config();
-
-const review = require('./review.js');
+const defVal = require("../dashboard/initialReviewData.js");
 const fs = require('fs');
-const exp = require('express');
 const {
     Client,
     Collection,
     Intents,
 } = require('discord.js');
-const req = require('express/lib/request');
+const review = require('../src/review.js');
 
 
 /**
@@ -18,25 +16,17 @@ const options = {
     intents: [Intents.FLAGS.GUILDS]
 };
 const client = new Client(options);
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-/**
- * express関連
- */
-const app = exp();
-app.set('view engine', 'ejs');
-app.get('/', function (req, res) {
-    res.render('./index.ejs', review.getSendData());
-});
+const commandFiles = fs.readdirSync('./bundles/med1reviewing/commands').filter(file => file.endsWith('.js'));
 
 
-/**
- * Discord.jsの初期化
- */
-function discordjsInitialize() {
+module.exports = async function (nodecg) {
     /**
      * コマンド収集
      */
+
+    var rep = nodecg.Replicant("reviewData", {defaultValue: {...defVal}, persistent: false});
+    await review.init(nodecg);
+
     client.commands = new Collection();
     for (const file of commandFiles) {
         const command = require(`../commands/${file}`);
@@ -65,12 +55,6 @@ function discordjsInitialize() {
             await interaction.reply({ content: 'エラーが発生した為インタラクションを生成出来ませんでした。コンソールログを確認して下さい。' });
         }
     });
+
+    client.login(process.env.TOKEN);
 }
-
-
-/**
- * 初期実行
- */
-discordjsInitialize();
-client.login(process.env.TOKEN);
-app.listen(process.env.PORT);
