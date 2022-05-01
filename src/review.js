@@ -3,10 +3,10 @@ module.exports = {
      * 審査員の最大数
      */
     maxReviewerNum: 5,
-    rep : {},
+    rep: {},
     sendData: {},
 
-    init: async function(nodecg) {
+    init: async function (nodecg) {
         this.rep = nodecg.Replicant("reviewData");
         await this.rep.on("change", newVal => {
             this.sendData = this.rep.value;
@@ -42,21 +42,21 @@ module.exports = {
      */
     checkReviewed() {
         if ((this.sendData.currentMedley.listenerPoint.actualPoint != -1)) {
-            this.sendData.currentMedley.point = this.sendData.currentMedley.listenerPoint.actualPoint;
+            var currentMedley = { ...this.sendData.currentMedley };
+            currentMedley.point = currentMedley.listenerPoint.actualPoint;
             var valid = true;
-            this.sendData.currentMedley.reviewersPoint.forEach((elem, index) => {
+            currentMedley.reviewersPoint.forEach((elem, index) => {
                 if (this.sendData.reviewers[index].isValid == true) {
                     if (elem != -1) {
-                        this.sendData.currentMedley.point += elem;
+                        currentMedley.point += elem;
                     } else {
                         valid = false;
                     }
                 }
             });
             if (!valid) return false;
-            this.sendData.currentMedley.point = Math.round(this.sendData.currentMedley.point * 100) / 100;
-
-            this.sendData.medleys.push({ ...this.sendData.currentMedley });
+            currentMedley.point = Math.round(currentMedley.point * 100) / 100;
+            this.sendData.currentMedley = { ...currentMedley };
             return true;
         }
         return false;

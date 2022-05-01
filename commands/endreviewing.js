@@ -21,6 +21,7 @@ async function execute(interaction) {
     } else {
         review.sendData.reviewingStatus = 0;
         const genJsonData = JSON.stringify(review.jsonGen());
+        review.sendData.medleys.push({ ...review.sendData.currentMedley });
 
         const jsonFile = new MessageAttachment(Buffer.from(genJsonData), texts.jsonFileName);
         interaction.reply({ files: [jsonFile], content: "採点を終了しました。次の採点を開始出来ます。", });

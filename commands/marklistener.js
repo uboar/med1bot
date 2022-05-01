@@ -26,10 +26,6 @@ async function execute(interaction) {
     var sumPercentage = 0;
 
 
-    if (review.sendData.reviewingStatus != -1) {
-        interaction.reply("採点が進行中ではありません。");
-    }
-
     points.forEach((elem, index) => {
         if ((elem < 0) || (elem > 100)) {
             interaction.reply("各点の割合は0～100％で記入する必要があります。");

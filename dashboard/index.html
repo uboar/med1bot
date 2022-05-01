@@ -18,22 +18,6 @@
             <v-flex>
                 <v-row>
                     <v-col cols="4">
-                        <v-card class="ma-1" elevation="4" dark>
-                            <v-card-title>
-                                採点結果の表示状態：
-                                <v-chip color="pink" v-if="receivedData.show">表示中</v-chip>
-                                <v-chip color="green" v-else>表示なし</v-chip>
-                            </v-card-title>
-                            <v-divider></v-divider>
-                            <v-card-text>
-                                <v-btn color="pink" block elevation="4" v-if="receivedData.show"
-                                    @click="changeShow(false)">表示を消す</v-btn>
-                                <v-btn color="green" rounded block v-else-if="receivedData.reviewingStatus > 0"
-                                    elevation="4" @click="changeShow(true)">表示する</v-btn>
-                                <v-btn color="green" rounded block v-else outlined elevation="4"
-                                    @click="changeShow(true)">表示する(採点未終了)</v-btn>
-                            </v-card-text>
-                        </v-card>
                         <v-card dark class="ma-1">
                             <v-card-text>
                                 <v-textarea label="メモ帳" dense auto-grow>
@@ -146,6 +130,7 @@
                         { text: "視聴者投票", value: "listenerPoint.actualPoint" },
                         { text: "", value: "copy" }
                     ];
+                    this.$forceUpdate();
                 });
             },
             data: {

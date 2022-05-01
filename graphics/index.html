@@ -20,10 +20,10 @@
 
 <body>
     <div id="app">
-        <v-app style="background: rgba(0, 0, 0, 0);" class="overflow-hidden">
+        <v-app style="background: rgba(0, 0, 0, 0);" class="overflow-hidden" v-if="!reload">
             <!--放送表示部-->
             <div class="justify-center" v-if="JSON.stringify(receivedData) != `{}`">
-                <div v-show="receivedData.show" class="point-wrapper animate__animated animate__bounceIn my-8">
+                <div class="point-wrapper my-8">
                     <div class="point-total">
                         <!--点数表示部-->
                         <div class="point-item-wrapper">
@@ -32,7 +32,10 @@
                         </div>
                         <!--メドレー名表示部-->
                         <div class="point-title-wrapper">
-                            <span><h5 class="my-n2">{{receivedData.currentMedley.name}}</h5><h6 class="mb-n2">{{receivedData.currentMedley.artist}}</h6></span>
+                            <span>
+                                <h5 class="my-n2">{{receivedData.currentMedley.name}}</h5>
+                                <h6 class="mb-n2">{{receivedData.currentMedley.artist}}</h6>
+                            </span>
                         </div>
                     </div>
                     <div class="point-grid">
@@ -94,14 +97,15 @@
          */
         var rep = nodecg.Replicant("reviewData");
         rep.on("change", newValue => {
-            console.log("changed")
             app.receivedData = JSON.parse(JSON.stringify(newValue));
+            app.$forceUpdate();
         });
 
         var app = new Vue({
             el: '#app',
             vuetify: new Vuetify(),
             data: {
+                reload: false,
                 receivedData: {},
                 models: {
                     tab: 0,

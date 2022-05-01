@@ -9,10 +9,7 @@ const texts = {
 async function execute(interaction) {
     const point = interaction.options.getNumber(texts.point);
 
-
-    if (review.sendData.reviewingStatus != -1) {
-        interaction.reply("採点が進行中ではありません。");
-    } else if ((point < 0) || (point > 100)) {
+    if ((point < 0) || (point > 100)) {
         interaction.reply('点数は0～100点の間で指定する必要があります。');
     } else {
         var valid = false;
